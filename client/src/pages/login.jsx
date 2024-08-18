@@ -3,6 +3,24 @@ import { useState } from "react";
 import {  useNavigate } from "react-router-dom";
 export const Registration = () => {
   const navigate=useNavigate();
+  const amount=1500;
+  const currency="INR";
+  const recieptId="Testing1"
+  const paymentHandler= async (e)=>{
+    const response = await fetch("http://localhost:5000/register",
+      {method:"POST",
+        body:JSON.stringify({
+          amount,
+          currency,
+          reciept:recieptId,
+        }),
+        headers:{
+          "Content-type":"application/json"
+        }
+      });
+      const order= await response.json();
+      console.log(order);
+  }
   const [user,setUser]= useState({
     Firstname:"",
     Lastname:"",
@@ -110,7 +128,8 @@ export const Registration = () => {
                 value={user.phone} 
                 onChange={handleInput}/>
             </li>
-            <li><button >Register</button></li>
+            <li><button onClick={paymentHandler}>Register</button></li>
+            
       </ul>
 
       

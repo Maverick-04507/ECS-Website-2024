@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Blah = () => {
+export const Blah = () => {
   return (
-    <div>Blah</div>
+    <div>ECS landing Page</div>
   )
 }
 

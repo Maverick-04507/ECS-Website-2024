@@ -3,37 +3,23 @@ import User from "../models/user_model.js";
 const RegisterHTML=async (req,res)=>{
     try {
 
-        const {Firstname,
-            Lastname,
-            emailId,
+        const {Name,
+            scholarid,
+            email,
             password,
             phone}=req.body;
-        console.log(req.body,"high",emailId,"hi")
-        // let userExist={};
-        // if(emailId!=""){
-        //      userExist =await User.findOne(emailId)
-        //      console.log(userExist);
-        // }
+        console.log(req.body,"high",scholarid,"hi")
         
-        // if (userExist==null&&emailId!=null)
-        //      {
-        //     await User.create(Firstname, Lastname,username, emailId, password, phone)
-        //     // res.send("welcome to my Register")
-        //     console.log('created user');
-        // }
-        // else 
-        // res
-        // .status(400).json({mssg:"Email already exists"})
-        // return //must
-        if(emailId){
-            console.log(emailId,"in")
+        if(scholarid){
+            console.log(scholarid,"in")
+            //verify if admin later job
             await User.create({
-                Firstname:req.body.Firstname,
-                Lastname:req.body.Lastname,
-                emailId:req.body.emailId,
+                Name:req.body.Name,
+                scholarid:req.body.scholarid,
+                email:req.body.email,
                 password:req.body.password,
                 phone:req.body.phone,
-                isAdmin:true
+                isAdmin:false
             })
             res.status(200).json({
                 mssg:"registered Successfully"
@@ -45,5 +31,27 @@ const RegisterHTML=async (req,res)=>{
         res.status(400).send({mssg:"Page not found"})
     }
 }
+const SignIn=async (req,res)=>{
+    try {
+        console.log("entered")
+        const {
+            scholarid,
+            email,
+            password,
+            }=req.body;
+        console.log(req.body,"high",scholarid,"hi")
+        if((scholarid)){
+            console.log(scholarid,"in")
+            // res.redirect("https://www.ecs.college/");
+            res.status(200).json({
+                mssg:"logged in Successfully"
+                // userID
+            })
+        }
+        else window.alert("Please Sign Up");
+    } catch (error) {
+        res.status(400).send({mssg:"Page not found"})
+    }
+}
 
-export default {RegisterHTML};
+export default {RegisterHTML,SignIn};
