@@ -59,7 +59,7 @@ const Regi = () => {
         navigate("/register");
       }
     e.preventDefault();
-    // sendDaatatobackend
+    // sendDatatobackend
       const res=await fetch(backendUrl.signup,{
         method:"POST",
         headers:{
@@ -89,8 +89,6 @@ const Regi = () => {
   const handleSignIn=async (e)=>{
     try {
     e.preventDefault();
-    // sendDaatatobackend
-    console.log("INside", Credentials)
       const res=await fetch(backendUrl.signin,{
         method:"POST",
         headers:{
@@ -98,8 +96,6 @@ const Regi = () => {
         },
         body: JSON.stringify(Credentials)
       })
-      // const data = await res.json();
-      console.log(JSON.stringify(Credentials),"hey")
       if(res.ok){
             window.alert("Login Succesful!")
             console.log(" Succesfully login")
@@ -111,7 +107,7 @@ const Regi = () => {
               phone:"",
             })
             navigate("/profile");
-            process.exit(1);
+            process.exit(0);
       }
     } catch (error) {
       console.log(error);
