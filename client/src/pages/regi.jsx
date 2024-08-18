@@ -60,7 +60,6 @@ const Regi = () => {
       }
     e.preventDefault();
     // sendDaatatobackend
-    console.log("INside", user)
       const res=await fetch(backendUrl.signup,{
         method:"POST",
         headers:{
@@ -68,8 +67,6 @@ const Regi = () => {
         },
         body: JSON.stringify(user)
       })
-      // const data = await res.json();
-      console.log(JSON.stringify(user),"hey")
       if(res.ok){
             window.alert("Registration Succesful")
             console.log(" Succesfully registered")
@@ -81,7 +78,7 @@ const Regi = () => {
               phone:"",
             })
             navigate("/register");
-            process.exit(1);
+            process.exit(0);
       }
     } catch (error) {
       console.log(error);
