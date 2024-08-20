@@ -40,15 +40,33 @@ const SignIn=async (req,res)=>{
             password,
             }=req.body;
         console.log(req.body,"high",scholarid,"hi")
-        if((scholarid)){
-            console.log(scholarid,"in")
-            // res.redirect("https://www.ecs.college/");
-            res.status(200).json({
-                mssg:"logged in Successfully"
-                // userID
-            })
-        }
-        else window.alert("Please Sign Up");
+        User.findOne({scholarid: scholarid})
+        .then(User =>{
+            if(User){
+                if(User.password===password){
+                    res.status(200).json(
+                        "Success"
+                    )
+                    console.log("Login Successful");
+
+                }
+                else {
+                    res.status(500).json("Invalid Credentials")
+                    window.alert("Invalid Credentials")};
+
+            }
+            else{
+                res.status(500).json("Not Found")
+                res.json("Please Signup")
+                window.alert("Please Signup User Not Found")
+            }
+        })
+        .catch(()=>{
+            console.log("error")
+        })
+        
+                 
+        
     } catch (error) {
         res.status(400).send({mssg:"Page not found"})
     }
